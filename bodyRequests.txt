@@ -1,0 +1,20 @@
+Signup:
+
+{
+    "firstName": "Peace",
+    "lastName": "Hanson",
+    "username": "peace",
+    "email": "peace@gmail.com",
+    "password":"Peace@123",
+    "mobile":"078834343",
+    "roleName": "ROLE_ADMIN"
+}
+
+
+Signin:
+
+{
+
+    "login": "peace@gmail.com",
+    "password":"Peace@123"
+}
