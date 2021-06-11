@@ -50,7 +50,7 @@ public class MarkController{
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Course());
 		
 	}
-	
+
 //	adding new marks
 @PostMapping
 public ResponseEntity<?> save(@Valid @RequestBody CreateMarkDTO dto){
@@ -66,7 +66,6 @@ public ResponseEntity<?> save(@Valid @RequestBody CreateMarkDTO dto){
 
 	return ResponseEntity.status(HttpStatus.CREATED).body(markService.save(dto, student.get(), course.get()));
 }
-
 
 // update MARKS by id
 @PutMapping("{id}")
