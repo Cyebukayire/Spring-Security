@@ -101,6 +101,4 @@ public ResponseEntity<Mark> updateMarkById(@PathVariable Long id, @RequestBody C
 		courseRepository.deleteById(id);
 	}
 
-
-
 }
