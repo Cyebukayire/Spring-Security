@@ -50,8 +50,7 @@ public class JwtTokenProvider {
                 .setIssuedAt(new
                         Date(System.currentTimeMillis())) .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
-
-
+        
         return token;
     }
 
