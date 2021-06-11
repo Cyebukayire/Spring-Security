@@ -15,6 +15,7 @@ import com.example.classbdemo.model.User;
 import com.example.classbdemo.repositories.IRoleRepository;
 import com.example.classbdemo.repositories.IUserRepository;
 import com.example.classbdemo.security.JwtTokenProvider;
+import com.example.classbdemo.utils.APIResponse;
 import com.example.classbdemo.utils.JwtAuthenticationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -104,7 +105,7 @@ public class AuthController {
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/users/{username}")
                 .buildAndExpand(result.getUsername()).toUri();
 
-        return ResponseEntity.created(location).body("Successfully registered");
+        return ResponseEntity.created(location).body(new APIResponse("Successfully registered", true));
     }
 
 }
