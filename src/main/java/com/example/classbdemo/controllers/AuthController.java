@@ -1,6 +1,5 @@
 package com.example.classbdemo.controllers;
 
-
 import java.net.URI;
 import java.util.Collections;
 import java.util.Optional;
@@ -33,8 +32,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-
 
 @RestController
 @RequestMapping("/api/auth")
@@ -104,7 +101,6 @@ public class AuthController {
         user.setRoles(Collections.singleton(userRole.get()));
 
         User result = userRepository.save(user);
-
 
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/users/{username}")
                 .buildAndExpand(result.getUsername()).toUri();
