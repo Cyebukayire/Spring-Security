@@ -105,5 +105,4 @@ public class AuthController {
 
         return ResponseEntity.created(location).body(new APIResponse("Successfully registered", true));
     }
-
 }
