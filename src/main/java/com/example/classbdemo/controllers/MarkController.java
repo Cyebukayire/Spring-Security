@@ -21,9 +21,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/marks")
 public class MarkController{
-
-
-
 	@Autowired
 	private MarkRepository markRepository;
 
