@@ -1,6 +1,5 @@
 package com.example.classbdemo.controllers;
 
-
 import java.net.URI;
 import java.util.Collections;
 import java.util.Optional;
@@ -15,6 +14,7 @@ import com.example.classbdemo.model.User;
 import com.example.classbdemo.repositories.IRoleRepository;
 import com.example.classbdemo.repositories.IUserRepository;
 import com.example.classbdemo.security.JwtTokenProvider;
+import com.example.classbdemo.utils.APIResponse;
 import com.example.classbdemo.utils.JwtAuthenticationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,8 +32,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-
 
 @RestController
 @RequestMapping("/api/auth")
@@ -78,11 +76,11 @@ public class AuthController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
 
         if (signUpRequest.getEmail() != null && userRepository.existsByEmail(signUpRequest.getEmail())) {
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email Address already in use!");
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new APIResponse("Email Address already in use!", true));
         }
 
         if (userRepository.existsByMobile(signUpRequest.getMobile())) {
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Phone number already in use!");
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body( new APIResponse("Phone number already in use!", true));
         }
 
         User user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getMobile(),
@@ -96,15 +94,18 @@ public class AuthController {
 
         Optional<Role> userRole = roleRepository.findByName(signUpRequest.getRoleName());
 
+        if(!userRole.isPresent()){
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new APIResponse("Role name not registered", true));
+        }
+
         user.setRoles(Collections.singleton(userRole.get()));
 
         User result = userRepository.save(user);
 
-
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/users/{username}")
                 .buildAndExpand(result.getUsername()).toUri();
 
-        return ResponseEntity.created(location).body("Successfully registered");
+        return ResponseEntity.created(location).body(new APIResponse("Successfully registered", true));
     }
 
 }
