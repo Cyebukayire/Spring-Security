@@ -30,8 +30,7 @@ public class CourseController {
 		
 		return courseRepository.findAll();
 	}
-
-
+	
    //get course by id
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getById(@PathVariable(value="id") Long id) {
