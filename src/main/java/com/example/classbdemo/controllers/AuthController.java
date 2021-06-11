@@ -99,9 +99,7 @@ public class AuthController {
         }
 
         user.setRoles(Collections.singleton(userRole.get()));
-
         User result = userRepository.save(user);
-
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/users/{username}")
                 .buildAndExpand(result.getUsername()).toUri();
 
