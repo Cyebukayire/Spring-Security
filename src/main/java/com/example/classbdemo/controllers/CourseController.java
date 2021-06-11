@@ -30,7 +30,7 @@ public class CourseController {
 		
 		return courseRepository.findAll();
 	}
-	
+
    //get course by id
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getById(@PathVariable(value="id") Long id) {
@@ -74,9 +74,5 @@ public class CourseController {
 	public void deleteCourseById(@PathVariable Long id){
 		courseRepository.deleteById(id);
 	}
-
-
-
-
 
 }
