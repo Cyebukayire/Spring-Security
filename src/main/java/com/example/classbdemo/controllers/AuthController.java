@@ -79,11 +79,11 @@ public class AuthController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
 
         if (signUpRequest.getEmail() != null && userRepository.existsByEmail(signUpRequest.getEmail())) {
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email Address already in use!");
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new APIResponse("Email Address already in use!", true));
         }
 
         if (userRepository.existsByMobile(signUpRequest.getMobile())) {
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Phone number already in use!");
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body( new APIResponse("Phone number already in use!", true));
         }
 
         User user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getMobile(),
@@ -96,6 +96,10 @@ public class AuthController {
         user.setFullName(signUpRequest.getFirstName()+" "+signUpRequest.getLastName());
 
         Optional<Role> userRole = roleRepository.findByName(signUpRequest.getRoleName());
+
+        if(!userRole.isPresent()){
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new APIResponse("Role name not registered", true));
+        }
 
         user.setRoles(Collections.singleton(userRole.get()));
 
