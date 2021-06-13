@@ -9,7 +9,6 @@ import com.example.classbdemo.enumerations.ERoleName;
 @Entity
 @Table(name = "roles")
 
-
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
