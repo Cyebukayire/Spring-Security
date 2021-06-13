@@ -59,7 +59,8 @@ public class CourseController {
 	Optional<Course> CourseData = courseRepository.findById(id);
 	if(CourseData.isPresent()){
 		Course _course = CourseData.get();
-		_course.setId(course.getId());
+//		_course.setId(course.getId());
+		_course.setId(id);
 		_course.setName(course.getName());
 		_course.setCode(course.getCode());
 		return new ResponseEntity<>(courseRepository.save(_course),HttpStatus.OK);
