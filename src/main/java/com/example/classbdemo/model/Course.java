@@ -43,5 +43,6 @@ public class Course {
 
 	public void setCode(String code) {
 		this.code = code;
-
+	}
+	
 }
